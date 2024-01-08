@@ -21,7 +21,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("getallsources")]
         public List<IncomeSource> GetAllSources()
         {
-            var repo = new SourceRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             return repo.GetAllSources();
         }
 
@@ -29,7 +29,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("deletesource")]
         public void DeleteSource(DeleteSourceViewModel vm)
         {
-            var repo = new SourceRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             repo.DeleteSource(vm.SourceId);
         }
 
@@ -38,7 +38,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("addsource")]
         public void AddSource(AddSourceViewModel viewModel)
         {
-            var repo = new SourceRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             repo.AddSource(viewModel.SourceName);
         }
 
@@ -46,7 +46,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("getsourceidsthathaveincomes")]
         public List<int> GetSourceIdsThatHaveIncomes()
         {
-            var repo = new SourceRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             return repo.GetSourceIdsThatHaveIncomes();
         }
 
@@ -55,7 +55,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("editsource")]
         public void EditSource(EditSourceViewModel viewModel)
         {
-            var repo = new SourceRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             repo.EditSource(viewModel.Id, viewModel.SourceNameEdited);
         }
 
@@ -63,7 +63,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("addmaaserpayment")]
         public void AddMaaserPayment(MaaserPayment maaser)
         {
-            var repo = new MaaserRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             repo.AddMaaserPayment(maaser);
         }
 
@@ -71,7 +71,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("getallmaaserpayments")]
         public List<MaaserPayment> GetAllMaaserPayments()
         {
-            var repo = new MaaserRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             return repo.GetAllMaaserPayments();
         }
 
@@ -79,7 +79,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("getallincomes")]
         public List<IncomesViewModel> GetAllIncomes()
         {
-            var repo = new IncomeRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             var incomes = repo.GetAllIncomes();
             return incomes.Select(i => new IncomesViewModel
             {
@@ -92,7 +92,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("addincome")]
         public void AddIncome(Income income)
         {
-            var repo = new IncomeRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             repo.AddIncome(income);
         }
 
@@ -100,7 +100,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("getgroupedincomes")]
         public List<GroupedIncomesViewModel> SourcesWithIncomes()
         {
-            var repo = new IncomeRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             var sourcesWithIncomes = repo.GetSourcesWithIncomes();
 
             //didn't work cuz invalid casting:
@@ -144,7 +144,7 @@ namespace ReactMaaserTrackerMUI_Starter.Web.Controllers
         [Route("getmaaseroverview")]
         public MaaserOverviewViewModel GetMaaserOverview()
         {
-            var repo = new MaaserRepo(_connectionString);
+            var repo = new MaaserTrackerRepo(_connectionString);
             var totalIncome = repo.GetTotalIncome();
             var totalMaaser = repo.GetTotalMaaser();
             var maaserObligated = totalIncome / 10;

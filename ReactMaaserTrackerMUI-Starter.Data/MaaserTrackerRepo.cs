@@ -2,18 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ReactMaaserTrackerMUI_Starter.Data
 {
-    public class SourceRepo
+    public class MaaserTrackerRepo
     {
         private string _connectionString;
-        public SourceRepo(string connectionString)
+        public MaaserTrackerRepo(string connectionString)
         {
             _connectionString = connectionString;
         }
+
         public void AddSource(string sourceName)
         {
             var ctx = new MaaserTrackerDbContext(_connectionString);
@@ -58,6 +60,53 @@ namespace ReactMaaserTrackerMUI_Starter.Data
         {
             var ctx = new MaaserTrackerDbContext(_connectionString);
             return ctx.Sources.ToList();
+        }
+        public void AddIncome(Income income)
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            ctx.Incomes.Add(income);
+            ctx.SaveChanges();
+        }
+        public List<Income> GetAllIncomes()
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            return ctx.Incomes.ToList();
+        }
+
+        public List<IncomeSource> GetSourcesWithIncomes()
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            return ctx.Sources.Include(source => source.Incomes).ToList();
+        }
+
+        public string GetSourceName(int sourceId)
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            return ctx.Sources.FirstOrDefault(s => s.Id == sourceId).Source;
+        }
+
+        public void AddMaaserPayment(MaaserPayment maaser)
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            ctx.MaaserPayments.Add(maaser);
+            ctx.SaveChanges();
+        }
+
+        public List<MaaserPayment> GetAllMaaserPayments()
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            return ctx.MaaserPayments.ToList();
+        }
+
+        public decimal GetTotalIncome()
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            return ctx.Incomes.Sum(i => i.Amount);
+        }
+        public decimal GetTotalMaaser()
+        {
+            var ctx = new MaaserTrackerDbContext(_connectionString);
+            return ctx.MaaserPayments.Sum(m => m.Amount);
         }
     }
 }
