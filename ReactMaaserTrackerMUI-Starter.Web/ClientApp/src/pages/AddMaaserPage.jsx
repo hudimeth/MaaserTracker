@@ -32,7 +32,7 @@ const AddMaaserPage = () => {
                 Add Maaser
             </Typography>
             <TextField label="Recipient" value={maaserPayment.recipient} onChange={editMaaserInputs} name='recipient' variant="outlined" fullWidth margin="normal" />
-            <TextField label="Amount" value={maaserPayment.amount} onChange={editMaaserInputs} name='amount' variant="outlined" fullWidth margin="normal" />
+            <TextField label="Amount" value={maaserPayment.amount} onChange={editMaaserInputs} name='amount' variant="outlined" type='number' fullWidth margin="normal" />
             <TextField
                 label="Date"
                 type="date"

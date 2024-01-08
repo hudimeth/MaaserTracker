@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 const IncomePage = () => {
 
     const [regularIncomes, setRegularIncomes] = useState([]);
-    const [groupedIncomes, setGroupedIncomes] = useState({});
+    const [groupedIncomes, setGroupedIncomes] = useState([]);
     const [groupBySource, setGroupBySource] = useState(false);
 
     useEffect(() => {
