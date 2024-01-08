@@ -39,7 +39,6 @@ const AddMaaserPage = () => {
                 name='date'
                 value={dayjs(maaserPayment.date).format('YYYY-MM-DD')}
                 onChange={editMaaserInputs}
-                renderInput={(params) => <TextField {...params} fullWidth margin="normal" variant="outlined" />}
             />
             <Button variant="contained" onClick={AddMaaser} color="primary">Add Maaser</Button>
         </Container>
